@@ -1,0 +1,39 @@
+{
+    "id": "app-all",
+    "scm": {
+        "type": "git",
+        "uri": "git@bitbucket.org:org/app-first.git"
+    },
+    "container": {
+        "docker":{
+            "uri":"org/app-first"
+        }
+    },
+    "build":{
+        "commands":{
+            "test": "vendor/bin/phpunit"
+        }
+    },
+    "environments": {
+        "staging": {
+            "variables": {
+                "key": 1
+            }
+        },
+        "ci": {
+            "variables": {
+                 "key": 2
+            }
+        },
+        "qa": {
+            "variables": {
+                 "key": 3
+            }
+        },
+        "prod": {
+            "variables": {
+                 "key": 4
+            }
+        }
+    }
+}

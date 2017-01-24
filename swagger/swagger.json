@@ -1,0 +1,114 @@
+{
+  "info": {
+    "title": "Hello World",
+    "version": "1.0.0",
+    "description": "A sample API"
+  },
+  "host": "dfs",
+  "basePath": "/",
+  "swagger": "2.0",
+  "paths": {
+    "/apps/{id}": {
+      "get": {
+        "description": "Get a specific application",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "apps",
+            "schema": {
+              "$ref": "#/definitions/App"
+            }
+          }
+        }
+      }
+    },
+    "/apps": {
+      "get": {
+        "description": "List all applications",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "apps",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/App"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "App": {
+      "type": "object",
+      "required": [
+        "id",
+        "slug"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date"
+        },
+        "variables": {
+          "type": "object",
+          "properties": {
+            "local": {
+              "$ref": "#/definitions/AppVariables"
+            },
+            "test": {
+              "$ref": "#/definitions/AppVariables"
+            },
+            "development": {
+              "$ref": "#/definitions/AppVariables"
+            },
+            "acceptance": {
+              "$ref": "#/definitions/AppVariables"
+            },
+            "production": {
+              "$ref": "#/definitions/AppVariables"
+            }
+          }
+        }
+      }
+    },
+    "AppVariables": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        }
+      }
+    }
+  },
+  "responses": {},
+  "parameters": {},
+  "securityDefinitions": {},
+  "tags": []
+}

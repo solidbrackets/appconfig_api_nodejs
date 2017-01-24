@@ -1,0 +1,33 @@
+{
+  "name": "appconfig",
+  "version": "1.0.0",
+  "description": "API to maintain application configuration.",
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "install-docker": "docker-compose -f docker-compose.dev.yml run --rm app npm install",
+    "server-docker": "docker-compose -f docker-compose.dev.yml up",
+    "start": "node_modules/.bin/nodemon --exec \"node_modules/.bin/serverless offline --host=0.0.0.0 \"",
+    "tests": "node_modules/.bin/mocha test tests/integration/**  -r tests/bootstrap.js -t 30000",
+    "swagger": "node_modules/.bin/swagger-jsdoc -d swagger/swaggerDef.js -o swagger/swagger.json src/**/*.js",
+    "lint": "node_modules/.bin/eslint .",
+    "deploy": "npm prune --production && serverless deploy --stage production"
+  },
+  "dependencies": {
+    "async": "2.1.4",
+     "serverless-offline": "^3.5.7"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.7.15",
+    "chai": "3.5.0",
+    "crypto-js": "3.1.9-1",
+    "eslint": "3.12.2",
+    "eslint-config-google": "^0.7.1",
+    "js-yaml": "3.7.0",
+    "mocha": "3.2.0",
+    "nodemon": "1.11.0",
+    "serverless": "^1.4.0",
+    "supertest": "2.0.1",
+    "swagger-jsdoc": "1.8.3"
+  }
+}

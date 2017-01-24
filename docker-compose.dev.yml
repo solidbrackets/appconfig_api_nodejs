@@ -1,0 +1,20 @@
+version: '2'
+services:
+    app:
+        volumes:
+        - .:/app
+        build: .
+        command: npm start
+        ports:
+            - "7999:3000"
+        depends_on:
+            - db
+        environment:
+            - AWS_ACCESS_KEY_ID=1
+            - AWS_SECRET_ACCESS_KEY=1
+            - SLS_DEBUG=*
+    db:
+        image: tutum/dynamodb
+        command: java -Djava.library.path=./DynamoDBLocal_lib -jar DynamoDBLocal.jar --sharedDb -inMemory
+        ports:
+            - "8000:8000"

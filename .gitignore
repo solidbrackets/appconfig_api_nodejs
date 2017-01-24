@@ -1,0 +1,4 @@
+.serverless
+.idea
+config/.env.json
+node_modules
