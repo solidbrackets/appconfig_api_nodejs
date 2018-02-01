@@ -48,6 +48,7 @@
 module.exports.mapDynamoDbToApi = (db) => {
    return {
             id: db.id,
+            project: db.project,
             scm: db.scm,
             container: db.container,
             build: db.build,
