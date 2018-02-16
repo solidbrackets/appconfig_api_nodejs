@@ -20,7 +20,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/appconfig-apps*"
+      Resource: "arn:aws:dynamodb:${self:provider.region}:*:table/appconfig-*"
 package:
   exclude:
     - .git/**
