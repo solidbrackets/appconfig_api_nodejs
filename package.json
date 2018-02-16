@@ -11,7 +11,7 @@
     "tests": "node_modules/.bin/mocha test tests/integration/**  -r tests/bootstrap.js -t 30000",
     "swagger": "node_modules/.bin/swagger-jsdoc -d swagger/swaggerDef.js -o swagger/swagger.json src/**/*.js",
     "lint": "node_modules/.bin/eslint .",
-    "deploy": "npm prune --production && serverless deploy --stage production"
+    "deploy": "npm prune --production && node_modules/.bin/serverless deploy --stage production"
   },
   "dependencies": {
     "async": "2.1.4",
@@ -26,7 +26,7 @@
     "js-yaml": "3.7.0",
     "mocha": "3.2.0",
     "nodemon": "1.11.0",
-    "serverless": "^1.4.0",
+    "serverless": "1.4.0",
     "supertest": "2.0.1",
     "swagger-jsdoc": "1.8.3"
   }

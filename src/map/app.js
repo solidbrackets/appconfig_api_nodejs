@@ -18,12 +18,6 @@
  *         format: guid
  *       slug:
  *         type: string
- *       createdAt:
- *         type: string
- *         format: date
- *       updatedAt:
- *         type: string
- *         format: date
  *       variables:
  *         type: object
  *         properties:

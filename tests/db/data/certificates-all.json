@@ -1,0 +1,9 @@
+{
+    "id": "123",
+    "folder" : "/appconfig",
+    "source" : "static|letsencrypt",
+    "domains": [
+        "a.solidshops.com",
+        "b.solidshops.com"
+    ]
+}

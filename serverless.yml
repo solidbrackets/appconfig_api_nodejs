@@ -25,18 +25,26 @@ package:
   exclude:
     - .git/**
 functions:
-  list:
+  apps-list:
     handler: src/handlers/apps-list.main
     events:
       - http:
           path: v1/apps
           method: get
           private: true
-  get:
+  apps-get:
     handler: src/handlers/apps-get.main
     events:
       - http:
           path: v1/apps/{id}
+          method: get
+          private: true
+
+  certificates-list:
+    handler: src/handlers/certificates-list.main
+    events:
+      - http:
+          path: v1/certificates
           method: get
           private: true
 
@@ -71,6 +79,22 @@ resources:
   #            ReadCapacityUnits: 1
   #            WriteCapacityUnits: 1
 
+    CertificatesDynamoDbTable:
+      Type: 'AWS::DynamoDB::Table'
+      DeletionPolicy: Retain
+      Properties:
+        TableName: 'appconfig-certificates'
+        AttributeDefinitions:
+          -
+            AttributeName: id
+            AttributeType: S
+        KeySchema:
+          -
+            AttributeName: id
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
 
 
 plugins:

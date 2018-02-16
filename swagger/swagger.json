@@ -50,6 +50,25 @@
           }
         }
       }
+    },
+    "/certificates": {
+      "get": {
+        "description": "List all applications",
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "certificates",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Certificates"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -66,14 +85,6 @@
         },
         "slug": {
           "type": "string"
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date"
-        },
-        "updatedAt": {
-          "type": "string",
-          "format": "date"
         },
         "variables": {
           "type": "object",
@@ -103,6 +114,30 @@
         "id": {
           "type": "string",
           "format": "guid"
+        }
+      }
+    },
+    "Certificates": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "guid"
+        },
+        "folder": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     }

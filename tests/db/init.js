@@ -11,28 +11,66 @@ const fs = require('fs');
 
 module.exports.init = (callback) => {
      try {
-            const serverlessConfig = yaml.safeLoad(fs.readFileSync('serverless.yml', 'utf8'));
-            const resourcesObject = serverlessConfig.resources.Resources;
-            for (let key in resourcesObject) {
-                if (resourcesObject.hasOwnProperty(key)) {
-                    const resource = resourcesObject[key];
 
-                    // delete the tables if it exists
-                    dynamoDb.deleteTable({TableName: resource.Properties.TableName}, function(err, data) {
-                        if(err) {
-                            // console.log(err);
-                        }
+         let resources = [];
 
-                        // create tables
-                        dynamoDb.createTable(resource.Properties, function(err, data) {
-                            if(err) {
-                                console.log(err);
-                            }
-                            callback();
-                        });
-                    });
-                }
+        const serverlessConfig = yaml.safeLoad(fs.readFileSync('serverless.yml', 'utf8'));
+        const resourcesObject = serverlessConfig.resources.Resources;
+        for (let key in resourcesObject) {
+            if (resourcesObject.hasOwnProperty(key)) {
+
+                const resource = resourcesObject[key];
+                resources.push(resource);
+
+
+
+                // const resource = resourcesObject[key];
+                //
+                // // delete the tables if it exists
+                // dynamoDb.deleteTable({TableName: resource.Properties.TableName}, function(err, data) {
+                //     if(err) {
+                //         // console.log(err);
+                //     }
+                //
+                //     // create tables
+                //     dynamoDb.createTable(resource.Properties, function(err, data) {
+                //         if(err) {
+                //             console.log(err);
+                //         }
+                //
+                //     });
+                // });
             }
+        }
+
+         // create each table
+         async.map(
+             resources,
+             function deleteTable(params, callback) {
+                 // delete the tables if it exists
+                 dynamoDb.deleteTable({TableName: params.Properties.TableName}, function(err, data) {
+                     if(err) {
+                         // console.log(err);
+                     }
+
+                     // create tables
+                     dynamoDb.createTable(params.Properties, function(err, data) {
+                         if(err) {
+                             console.log(err);
+                         }
+                         callback();
+                     });
+                 });
+             },
+             function afterAllDocumentsHaveBeenInserted(err, results) {
+                 if(err) {
+                     callback(err);
+                 }
+                 callback();
+             }
+         );
+
+
         } catch (e) {
             console.log(e);
         }
@@ -50,8 +88,10 @@ module.exports.seed = (callback) => {
                 if (files.hasOwnProperty(i)) {
                     let docString = fs.readFileSync(path + '/' + files[i], 'utf8');
 
+                    let arr = files[i].split("-");
+
                     const params = {
-                        TableName: 'appconfig-apps',
+                        TableName:  'appconfig-' + arr[0],
                         Item: JSON.parse(docString),
                     };
                     documents.push(params);

@@ -1,4 +1,4 @@
-FROM nodesource/jessie:4.3.2
+FROM node:argon
 
 
 RUN npm config set -g production false

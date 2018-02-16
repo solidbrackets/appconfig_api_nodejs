@@ -42,6 +42,7 @@ You can use the DynamoDB UI to query the database:
 ```json
 {
     "id": "yourappname",
+    "project": "yourproject",
     "scm": {
         "type": "git",
         "uri": "git@github.org:org/awesome.git"
@@ -63,6 +64,22 @@ You can use the DynamoDB UI to query the database:
             }
         },
         "development": {
+            "lb": [
+                {
+                    "http": true,
+                    "https": true,
+                    "nginx": {
+                        "server_names": [
+                            "your.domain.com"
+                        ]
+                    },
+                    "upstream": {
+                        "host": "127.0.0.1",
+                        "port": 8080
+                    },
+                    "certificateId": "123"
+                }
+            ],
             "variables": {
                  "key": 2
             }

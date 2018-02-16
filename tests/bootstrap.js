@@ -18,6 +18,7 @@ try {
     let contents = fs.readFileSync('config/.env.json', 'utf8');
     let contentObject = JSON.parse(contents);
     global.apiKey = require('crypto-js/md5')(contentObject.apikey);
+
 } catch (error) {
     console.log(error);
 }
