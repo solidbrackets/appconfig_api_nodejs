@@ -3,7 +3,7 @@
     "folder" : "/appconfig",
     "source" : "static|letsencrypt",
     "domains": [
-        "a.solidshops.com",
-        "b.solidshops.com"
+        "a.domain.com",
+        "b.domain.com"
     ]
 }
