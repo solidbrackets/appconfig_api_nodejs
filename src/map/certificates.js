@@ -15,7 +15,7 @@
  *       id:
  *         type: string
  *         format: guid
- *       folder:
+ *       description:
  *         type: string
  *       source:
  *         type: string
@@ -29,7 +29,7 @@ module.exports.mapDynamoDbToApi = (db) => {
    return {
         id: db.id,
         source: db.source,
-        folder: db.folder,
+        description: db.description,
         domains: db.domains
     };
 };
